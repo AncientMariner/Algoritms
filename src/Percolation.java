@@ -39,10 +39,6 @@ public class Percolation {
            throw new IllegalArgumentException("Size could not be 0 " +
                                                    "or less than 0");
         }
-        //special case for input size == 1
-//        if (n == 1) {
-//            n = n + 1;
-//        }
         end = n + 1;
 
         topVirtualElement = end * end;
