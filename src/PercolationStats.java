@@ -40,8 +40,8 @@ public class PercolationStats {
         int openCounter = 0;
 
         while (!percolation.percolates()) {
-            int x = StdRandom.uniform(1, n);
-            int y = StdRandom.uniform(1, n);
+            int x = StdRandom.uniform(1, n + 1);
+            int y = StdRandom.uniform(1, n + 1);
 
             if (!percolation.isOpen(x, y)) {
                percolation.open(x, y);
@@ -95,11 +95,12 @@ public class PercolationStats {
      */
     public static void main(String[] args) {
         StdOut.println("Please state the number of experiments ");
-        int numberOfExperiments = StdIn.readInt();
+//        int numberOfExperiments = StdIn.readInt();
         StdOut.println("Please state the size of area ");
-        int size = StdIn.readInt();
+//        int size = StdIn.readInt();
 
-        PercolationStats percolationStats = new PercolationStats(size, numberOfExperiments);
+//        PercolationStats percolationStats = new PercolationStats(size, numberOfExperiments);
+        PercolationStats percolationStats = new PercolationStats(0, 2);
         double mean = percolationStats.mean();
         double stddev = percolationStats.stddev();
         double min = percolationStats.confidenceLo();

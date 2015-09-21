@@ -34,10 +34,15 @@ public class Percolation {
      * creates N-by-N grid, with all sites blocked
      * @param n - size of the grid
      */
-    public Percolation(final int n) {
+    public Percolation(int n) {
         if (n <= 0) {
-           throw new IllegalArgumentException("Size could not be less than 0");
+           throw new IllegalArgumentException("Size could not be 0 " +
+                                                   "or less than 0");
         }
+        //special case for input size == 1
+//        if (n == 1) {
+//            n = n + 1;
+//        }
         end = n + 1;
 
         topVirtualElement = end * end;
@@ -202,7 +207,7 @@ public class Percolation {
      * @param j - column
      */
     private void checkBoundary(final int i, final int j) {
-        if (i < begin || i >= end || j < begin || j >= end) {
+        if (i < begin || i > end || j < begin || j > end) {
             throw new IndexOutOfBoundsException("Index is out of bounds "
                                                  + i + " " + j);
         }
