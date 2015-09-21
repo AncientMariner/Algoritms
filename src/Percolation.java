@@ -55,15 +55,17 @@ public class Percolation {
     public void open(final int i, final int  j) {
         checkBoundary(i, j);
 
-        grid[i][j] = true;
+        if (!isOpen(i, j)) {
+            grid[i][j] = true;
+        }
 
         connectVirtualTop(i, j);
         connectVirtualBottom(i, j);
 
-        checkLeftNeighbour(i, j);
-        checkRightNeighbour(i, j);
-        checkTopNeighbour(i, j);
-        checkBottomNeighbour(i, j);
+        connectLeftNeighbour(i, j);
+        connectRightNeighbour(i, j);
+        connectTopNeighbour(i, j);
+        connectBottomNeighbour(i, j);
     }
 
     /**
@@ -94,7 +96,7 @@ public class Percolation {
     public boolean isFull(final int i, final int j) {
         checkBoundary(i, j);
         if (isOpen(i, j)) {
-            return model.connected(getAbsoluteCoordinate(i, j), topVirtualElement);
+            return model.connected(model.find(getAbsoluteCoordinate(i, j)), topVirtualElement);
         }
         return false;
     }
@@ -129,10 +131,10 @@ public class Percolation {
      * @param i - row
      * @param j - column
      */
-    private void checkLeftNeighbour(final int  i, final int  j) {
+    private void connectLeftNeighbour(final int i, final int j) {
         int current = getAbsoluteCoordinate(i, j);
         if (j > begin && isOpen(i, j - 1)) {
-            model.union(current, checkNeighbour(i, j - 1));
+            model.union(current, model.find(checkNeighbour(i, j - 1)));
         }
     }
 
@@ -142,10 +144,10 @@ public class Percolation {
      * @param i - row
      * @param j - column
      */
-    private void checkRightNeighbour(final int  i, final int j) {
+    private void connectRightNeighbour(final int i, final int j) {
         int current = getAbsoluteCoordinate(i, j);
         if (j < end - 1 && isOpen(i, j + 1)) {
-            model.union(current, checkNeighbour(i, j + 1));
+            model.union(current, model.find(checkNeighbour(i, j + 1)));
         }
     }
 
@@ -155,10 +157,10 @@ public class Percolation {
      * @param i - row
      * @param j - column
      */
-    private void checkTopNeighbour(final int  i, final int j) {
+    private void connectTopNeighbour(final int i, final int j) {
         int current = getAbsoluteCoordinate(i, j);
         if (i > begin && isOpen(i - 1, j)) {
-            model.union(current, checkNeighbour(i - 1, j));
+            model.union(current, model.find(checkNeighbour(i - 1, j)));
         }
     }
 
@@ -168,10 +170,10 @@ public class Percolation {
      * @param i - row
      * @param j - column
      */
-    private void checkBottomNeighbour(final int i, final int j) {
+    private void connectBottomNeighbour(final int i, final int j) {
         int current = getAbsoluteCoordinate(i, j);
         if (i < end - 1 && isOpen(i + 1, j)) {
-            model.union(current, checkNeighbour(i + 1, j));
+            model.union(current, model.find(checkNeighbour(i + 1, j)));
         }
     }
 
