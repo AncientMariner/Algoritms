@@ -46,7 +46,6 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 ### Java template
->>>>>>> corrected size problem
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -77,5 +76,13 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+*~
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
 
 # Created by .ignore support plugin (hsz.mobi)
