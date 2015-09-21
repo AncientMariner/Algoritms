@@ -13,18 +13,22 @@ public class PercolationStats {
     private double[] threshold;
     //number of experiments
     private int numberOFExperiments;
-    //size of the percolation grid
 
     /**
      * performs independent experiments on an size-by-size grid
      * @param size number of grid
-     * @param numberOFExperiments number of experiments
+     * @param numberOfExperiments number of experiments
      */
-    public PercolationStats(int size, int numberOFExperiments) {
-        threshold = new double[numberOFExperiments];
-        this.numberOFExperiments = numberOFExperiments;
+    public PercolationStats(int size, int numberOfExperiments) {
+        if (size <= 0 || numberOfExperiments <= 0) {
+            throw new IllegalArgumentException("Please check the size " +
+                    "and number of experiments");
+        }
 
-        for (int i = 0; i < numberOFExperiments; i++) {
+        threshold = new double[numberOfExperiments];
+        this.numberOFExperiments = numberOfExperiments;
+
+        for (int i = 0; i < numberOfExperiments; i++) {
             int openCounter = calculate(size);
             threshold[i] = (double) openCounter / (size * size);
         }
@@ -95,12 +99,11 @@ public class PercolationStats {
      */
     public static void main(String[] args) {
         StdOut.println("Please state the number of experiments ");
-//        int numberOfExperiments = StdIn.readInt();
+        int numberOfExperiments = StdIn.readInt();
         StdOut.println("Please state the size of area ");
-//        int size = StdIn.readInt();
+        int size = StdIn.readInt();
 
-//        PercolationStats percolationStats = new PercolationStats(size, numberOfExperiments);
-        PercolationStats percolationStats = new PercolationStats(0, 2);
+        PercolationStats percolationStats = new PercolationStats(size, numberOfExperiments);
         double mean = percolationStats.mean();
         double stddev = percolationStats.stddev();
         double min = percolationStats.confidenceLo();
