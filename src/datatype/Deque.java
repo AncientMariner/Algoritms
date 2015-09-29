@@ -10,7 +10,7 @@ public class Deque implements Iterable<Deque.Item> {
     } // construct an empty deque
 
     public boolean isEmpty() {
-        return first == null;
+        return first == null || last == null;
     } // is the deque empty?
 
     public int size() {
@@ -22,36 +22,46 @@ public class Deque implements Iterable<Deque.Item> {
             throw new NullPointerException();
         }
         if (isEmpty()) {
-            first = last = item;
+            last = first;
         }
-
         Item oldFirst = first;
         first = new Item();
         first.value = item;
-        first.next = oldFirst;
         first.previous = null;
-        oldFirst.previous = first;
+
+        if (oldFirst != null) {
+            first.next = oldFirst;
+            oldFirst.previous = first;
+        }
 
         sizeCounter++;
+        if (size() == 1) {
+            last = first;
+        }
     }          // add the item to the front
 
     public void addLast(Item item) {
         if (item == null) {
             throw new NullPointerException();
         }
-
         if (isEmpty()) {
-            first = last = item;
+            first = last;
         }
 
         Item oldLast = last;
         last = new Item();
         last.value = item;
         last.next = null;
-        last.previous = oldLast;
-        oldLast.next = last;
+
+        if (oldLast != null) {
+            last.previous = oldLast;
+            oldLast.next = last;
+        }
 
         sizeCounter++;
+        if (size() == 1) {
+            first = last;
+        }
     }          // add the item to the end
 
     //    public Item removeFirst() {}               // remove and return the item from the front
