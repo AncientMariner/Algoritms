@@ -47,10 +47,32 @@ public class DequeTest {
         assertTrue(deque.size() == 2);
     }
 
+    @Test
+    public void testAddLast() {
+        deque.addLast(new Deque().new Item());
+        assertFalse(deque.isEmpty());
+        assertTrue(deque.size() != 0);
+        assertTrue(deque.size() == 1);
+    }
+
+
+    @Test
+    public void testAddLastTwice() {
+        deque.addLast(new Deque().new Item());
+        deque.addLast(new Deque().new Item());
+        assertFalse(deque.isEmpty());
+        assertTrue(deque.size() != 0);
+        assertTrue(deque.size() == 2);
+    }
 
     @Test(expected = NullPointerException.class)
-    public void testAddNull() {
+    public void testAddNullToTheBeginnning() {
         deque.addFirst(null);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testAddNullToTheEnd() {
+        deque.addLast(null);
     }
 
 //    @Test

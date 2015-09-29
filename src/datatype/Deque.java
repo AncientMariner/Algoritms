@@ -17,11 +17,6 @@ public class Deque implements Iterable<Deque.Item> {
         return sizeCounter;
     } // return the number of items on the deque
 
-    @Override
-    public Iterator<Item> iterator() {
-        return null;
-    }// return an iterator over items in order from front to end
-
     public void addFirst(Item item) {
         if (item == null) {
             throw new NullPointerException();
@@ -34,6 +29,8 @@ public class Deque implements Iterable<Deque.Item> {
         first = new Item();
         first.value = item;
         first.next = oldFirst;
+        first.previous = null;
+        oldFirst.previous = first;
 
         sizeCounter++;
     }          // add the item to the front
@@ -43,35 +40,40 @@ public class Deque implements Iterable<Deque.Item> {
             throw new NullPointerException();
         }
 
+        if (isEmpty()) {
+            first = last = item;
+        }
+
+        Item oldLast = last;
+        last = new Item();
+        last.value = item;
+        last.next = null;
+        last.previous = oldLast;
+        oldLast.next = last;
+
+        sizeCounter++;
     }          // add the item to the end
-//    public Item removeFirst() {}               // remove and return the item from the front
+
+    //    public Item removeFirst() {}               // remove and return the item from the front
 //    public Item removeLast() {}                // remove and return the item from the end
 
-    public static void main(String[] args) {
-    }   // unit testing
+    @Override
+    public Iterator<Item> iterator() {
+        return null;
+    }// return an iterator over items in order from front to end
 
     class Item {
         Item next;
         Item previous;
         Object value;
     }
+
+    public static void main(String[] args) {
+    }   // unit testing
 }
-
-
-
-
-
-/*
-* Corner cases.
+/* Corner cases.
  * Throw a java.lang.NullPointerException if the client attempts to add a null item;
- *
  * throw a java.util.NoSuchElementException if the client attempts to remove an item from an empty deque;
- *
  * throw a java.lang.UnsupportedOperationException if the client calls the remove() method in the iterator;
- *
  * throw a java.util.NoSuchElementException if the client calls the next() method in the iterator
- *  and there are no more items to return.
-
-
-*
-* */
+ *  and there are no more items to return. */
