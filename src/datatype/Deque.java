@@ -1,30 +1,63 @@
 package datatype;
 
-public class Deque// implements Iterable<Item>
-{
-    public Deque() {
+import java.util.Iterator;
 
+public class Deque implements Iterable<Deque.Item> {
+    private Item first, last;
+    int sizeCounter;
+
+    public Deque() {
     } // construct an empty deque
 
     public boolean isEmpty() {
-        return false;
+        return first == null;
     } // is the deque empty?
 
     public int size() {
-        return 0;
+        return sizeCounter;
     } // return the number of items on the deque
-//    public void addFirst(Item item) {}          // add the item to the front
-//    public void addLast(Item item) {}          // add the item to the end
+
+    @Override
+    public Iterator<Item> iterator() {
+        return null;
+    }// return an iterator over items in order from front to end
+
+    public void addFirst(Item item) {
+        if (item == null) {
+            throw new NullPointerException();
+        }
+        if (isEmpty()) {
+            first = last = item;
+        }
+
+        Item oldFirst = first;
+        first = new Item();
+        first.value = item;
+        first.next = oldFirst;
+
+        sizeCounter++;
+    }          // add the item to the front
+
+    public void addLast(Item item) {
+        if (item == null) {
+            throw new NullPointerException();
+        }
+
+    }          // add the item to the end
 //    public Item removeFirst() {}               // remove and return the item from the front
 //    public Item removeLast() {}                // remove and return the item from the end
-//    public Iterator<Item> iterator() {}        // return an iterator over items in order from front to end
-
-
-
 
     public static void main(String[] args) {
     }   // unit testing
+
+    class Item {
+        Item next;
+        Item previous;
+        Object value;
+    }
 }
+
+
 
 
 
