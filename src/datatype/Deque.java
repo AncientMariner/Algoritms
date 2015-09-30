@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 
 public class Deque<Item> implements Iterable {
     private Node first, last;
-    int sizeCounter;
+    private int sizeCounter;
 
     public Deque() {
     } // construct an empty deque

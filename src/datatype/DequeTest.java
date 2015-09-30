@@ -1,15 +1,13 @@
 package datatype;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
 
-import static org.junit.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class DequeTest {
     Deque deque;
@@ -120,6 +118,7 @@ public class DequeTest {
 
         Object obj = deque.removeFirst();
         assertNotNull(obj);
+        assertEquals(itemToAdd, obj);
 
         assertTrue(deque.isEmpty());
         assertTrue(deque.size() == 0);
@@ -136,39 +135,10 @@ public class DequeTest {
 
         Object obj = deque.removeLast();
         assertNotNull(obj);
+        assertEquals(itemToAdd, obj);
 
         assertTrue(deque.isEmpty());
         assertTrue(deque.size() == 0);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testAddNullToTheBeginnning() {
-        deque.addFirst(null);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testAddNullToTheEnd() {
-        deque.addLast(null);
-    }
-
-    @Test(expected = NoSuchElementException.class)
-    public void testRemoveFromEmpty() {
-        deque.removeFirst();
-    }
-
-    @Test
-    public void testIteratorNotNull() {
-        assertNotNull(deque.iterator());
-    }
-
-    @Test(expected = UnsupportedOperationException.class)
-    public void testRemoveInIterator() {
-        deque.iterator().remove();
-    }
-
-    @Test(expected = NoSuchElementException.class)
-    public void testIteratorNext() {
-        deque.iterator().next();
     }
 
     @Test
@@ -207,4 +177,33 @@ public class DequeTest {
         assertFalse(it.hasNext());
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testAddNullToTheBeginnning() {
+        deque.addFirst(null);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testAddNullToTheEnd() {
+        deque.addLast(null);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testRemoveFromEmpty() {
+        deque.removeFirst();
+    }
+
+    @Test
+    public void testIteratorNotNull() {
+        assertNotNull(deque.iterator());
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testRemoveInIterator() {
+        deque.iterator().remove();
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testIteratorNext() {
+        deque.iterator().next();
+    }
 }
