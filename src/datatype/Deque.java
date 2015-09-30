@@ -2,7 +2,7 @@ package datatype;
 
 import java.util.NoSuchElementException;
 
-public class Deque<Item> implements Iterable {
+public class Deque<Item> implements Iterable<Item> {
     private Node first, last;
     private int sizeCounter;
 
@@ -36,7 +36,7 @@ public class Deque<Item> implements Iterable {
         if (size() == 1) {
             last = first;
         }
-    }          // add the item to the front
+    } // add the item to the front
 
     public void addLast(Item item) {
         checkForNotNull(item);
@@ -56,7 +56,7 @@ public class Deque<Item> implements Iterable {
         if (size() == 1) {
             first = last;
         }
-    }          // add the item to the end
+    } // add the item to the end
 
     private void checkForNotNull(Item item) {
         if (item == null) {
@@ -77,7 +77,7 @@ public class Deque<Item> implements Iterable {
         }
         sizeCounter--;
         return itemToReturn.value;
-    }               // remove and return the item from the front
+    } // remove and return the item from the front
 
     public Item removeLast() {
         checkForEmptiness();
@@ -92,33 +92,37 @@ public class Deque<Item> implements Iterable {
         }
         sizeCounter--;
         return itemToReturn.value;
-    }                // remove and return the item from the end
+    } // remove and return the item from the end
 
     private void checkForEmptiness() {
         if (isEmpty()) {
-            throw new NoSuchElementException("It is impossible to remove an item");
+            throw new NoSuchElementException("It is impossible "
+                                            + "to remove an item");
         }
     }
 
     @Override
-    public Iterator iterator() {
+    public java.util.Iterator<Item> iterator() {
         return new Iterator();
-    }// return an iterator over items in order from front to end
+    } // return an iterator over items in order from front to end
+
+//    @Override
+//    public Iterator<Item> iterator() {
+//        return new Iterator<Item>();
+//    }// return an iterator over items in order from front to end
 
     class Node {
-        Node next;
-        Node previous;
-        Item value;
+        private Node next;
+        private Node previous;
+        private Item value;
     }
 
     class Iterator implements java.util.Iterator {
         private Node current = first;
-
         @Override
         public boolean hasNext() {
             return current != null;
         }
-
         @Override
         public Item next() {
             if (!hasNext()) {
@@ -128,14 +132,13 @@ public class Deque<Item> implements Iterable {
             current = current.next;
             return item;
         }
-
         @Override
         public void remove() {
-            throw new UnsupportedOperationException("It is impossible to remove via iterator");
+            throw new UnsupportedOperationException("It is impossible "
+                                                + "to remove via iterator");
         }
     }
 
-
     public static void main(String[] args) {
-    }   // unit testing
+    } // unit testing
 }

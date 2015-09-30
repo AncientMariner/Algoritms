@@ -3,9 +3,9 @@ package datatype;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.*;
 
@@ -151,31 +151,33 @@ public class DequeTest {
         deque.addFirst("item6");
         deque.addFirst("item7");
 
-        Deque.Iterator it =  deque.iterator();
+        Iterator iterator = deque.iterator();
 
-        assertTrue(it.hasNext());
-        assertEquals("item7", it.next());
+        assertTrue(iterator.hasNext());
+        assertEquals("item7", iterator.next());
 
-        assertTrue(it.hasNext());
-        assertEquals("item6", it.next());
+        assertTrue(iterator.hasNext());
+        assertEquals("item6", iterator.next());
 
-        assertTrue(it.hasNext());
-        assertEquals("item3", it.next());
+        assertTrue(iterator.hasNext());
+        assertEquals("item3", iterator.next());
 
-        assertTrue(it.hasNext());
-        assertEquals("item1", it.next());
+        assertTrue(iterator.hasNext());
+        assertEquals("item1", iterator.next());
 
-        assertTrue(it.hasNext());
-        assertEquals("item2", it.next());
+        assertTrue(iterator.hasNext());
+        assertEquals("item2", iterator.next());
 
-        assertTrue(it.hasNext());
-        assertEquals("item4", it.next());
+        assertTrue(iterator.hasNext());
+        assertEquals("item4", iterator.next());
 
-        assertTrue(it.hasNext());
-        assertEquals("item5", it.next());
+        assertTrue(iterator.hasNext());
+        assertEquals("item5", iterator.next());
 
-        assertFalse(it.hasNext());
+        assertFalse(iterator.hasNext());
     }
+
+
 
     @Test(expected = NullPointerException.class)
     public void testAddNullToTheBeginnning() {
