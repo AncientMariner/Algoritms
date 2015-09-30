@@ -207,4 +207,24 @@ public class DequeTest {
     public void testIteratorNext() {
         deque.iterator().next();
     }
+
+    @Test
+    public void testMixed() {
+        deque.addLast("9");
+        deque.addFirst("1");
+        deque.addLast("8");
+        deque.addFirst("2");
+
+        Object o = deque.removeLast();
+        assertEquals((String)o, "8");
+//        deque.removeFirst();
+        Iterator iterator = deque.iterator();
+        assertTrue(iterator.hasNext());
+        assertEquals(iterator.next(), "2");
+        assertTrue(iterator.hasNext());
+        assertEquals(iterator.next(), "1");
+        assertTrue(iterator.hasNext());
+        assertEquals(iterator.next(), "9");
+    }
+
 }
