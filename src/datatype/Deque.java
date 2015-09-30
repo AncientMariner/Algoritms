@@ -1,9 +1,9 @@
 package datatype;
 
-import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class Deque implements Iterable<Deque.Item> {
-    private Item first, last;
+public class Deque<Item> implements Iterable {
+    private Node first, last;
     int sizeCounter;
 
     public Deque() {
@@ -18,14 +18,12 @@ public class Deque implements Iterable<Deque.Item> {
     } // return the number of items on the deque
 
     public void addFirst(Item item) {
-        if (item == null) {
-            throw new NullPointerException();
-        }
+        checkForNotNull(item);
         if (isEmpty()) {
             last = first;
         }
-        Item oldFirst = first;
-        first = new Item();
+        Node oldFirst = first;
+        first = new Node();
         first.value = item;
         first.previous = null;
 
@@ -41,15 +39,12 @@ public class Deque implements Iterable<Deque.Item> {
     }          // add the item to the front
 
     public void addLast(Item item) {
-        if (item == null) {
-            throw new NullPointerException();
-        }
+        checkForNotNull(item);
         if (isEmpty()) {
             first = last;
         }
-
-        Item oldLast = last;
-        last = new Item();
+        Node oldLast = last;
+        last = new Node();
         last.value = item;
         last.next = null;
 
@@ -57,33 +52,90 @@ public class Deque implements Iterable<Deque.Item> {
             last.previous = oldLast;
             oldLast.next = last;
         }
-
         sizeCounter++;
         if (size() == 1) {
             first = last;
         }
     }          // add the item to the end
 
-    //    public Item removeFirst() {}               // remove and return the item from the front
-//    public Item removeLast() {}                // remove and return the item from the end
+    private void checkForNotNull(Item item) {
+        if (item == null) {
+            throw new NullPointerException();
+        }
+    }
+
+    public Item removeFirst() {
+        checkForEmptiness();
+        Node itemToReturn = first;
+
+        if (size() > 1) {
+            first = first.next;
+            first.previous = null;
+        } else {
+            first = null;
+            last = null;
+        }
+        sizeCounter--;
+        return itemToReturn.value;
+    }               // remove and return the item from the front
+
+    public Item removeLast() {
+        checkForEmptiness();
+        Node itemToReturn = last;
+
+        if (size() > 1) {
+            last = last.previous;
+            last.next = null;
+        } else {
+            first = null;
+            last = null;
+        }
+        sizeCounter--;
+        return itemToReturn.value;
+    }                // remove and return the item from the end
+
+    private void checkForEmptiness() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("It is impossible to remove an item");
+        }
+    }
 
     @Override
-    public Iterator<Item> iterator() {
-        return null;
+    public Iterator iterator() {
+        return new Iterator();
     }// return an iterator over items in order from front to end
 
-    class Item {
-        Item next;
-        Item previous;
-        Object value;
+    class Node {
+        Node next;
+        Node previous;
+        Item value;
     }
+
+    class Iterator implements java.util.Iterator {
+        private Node current = first;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public Item next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException("No more items to return");
+            }
+            Item item = current.value;
+            current = current.next;
+            return item;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("It is impossible to remove via iterator");
+        }
+    }
+
 
     public static void main(String[] args) {
     }   // unit testing
 }
-/* Corner cases.
- * Throw a java.lang.NullPointerException if the client attempts to add a null item;
- * throw a java.util.NoSuchElementException if the client attempts to remove an item from an empty deque;
- * throw a java.lang.UnsupportedOperationException if the client calls the remove() method in the iterator;
- * throw a java.util.NoSuchElementException if the client calls the next() method in the iterator
- *  and there are no more items to return. */
