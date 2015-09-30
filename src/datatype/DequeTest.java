@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.*;
 
 public class DequeTest {

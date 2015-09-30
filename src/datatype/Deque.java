@@ -1,5 +1,6 @@
 package datatype;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class Deque<Item> implements Iterable<Item> {
@@ -102,13 +103,13 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     @Override
-    public java.util.Iterator<Item> iterator() {
-        return new Iterator();
+    public Iterator<Item> iterator() {
+        return new MyIterator();
     } // return an iterator over items in order from front to end
 
 //    @Override
-//    public Iterator<Item> iterator() {
-//        return new Iterator<Item>();
+//    public MyIterator<Item> iterator() {
+//        return new MyIterator<Item>();
 //    }// return an iterator over items in order from front to end
 
     class Node {
@@ -117,7 +118,7 @@ public class Deque<Item> implements Iterable<Item> {
         private Item value;
     }
 
-    class Iterator implements java.util.Iterator {
+    class MyIterator implements java.util.Iterator {
         private Node current = first;
         @Override
         public boolean hasNext() {
