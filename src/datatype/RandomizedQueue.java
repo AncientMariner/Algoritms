@@ -56,7 +56,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         int numMoved = size() - random - 1;
         if (numMoved > 0) {
-            System.arraycopy(array, random+1, array, random, numMoved);
+            for (int i = random; i < N - 1 ; i++) {
+                array[i] = array[i + 1];
+            } // System.arraycopy(array, random+1, array, random, numMoved);
         }
         array[--N] = null;
 
@@ -81,12 +83,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         return new MyIterator();
     } // return an independent iterator over items in random order
 
-    class Node {
-        private Item value;
-    }
-
     class MyIterator implements java.util.Iterator {
-        private Node current = (Node) array[0];
         int random;
 
         @Override

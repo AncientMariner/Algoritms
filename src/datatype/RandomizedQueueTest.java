@@ -37,7 +37,7 @@ public class RandomizedQueueTest {
 
     @Test
     public void testEnqueue() {
-        randomizedQueue.enqueue(randomizedQueue.new Node());
+        randomizedQueue.enqueue("123");
         assertTrue(randomizedQueue.size() != 0);
         assertFalse(randomizedQueue.isEmpty());
         assertTrue(randomizedQueue.size() == 1);
@@ -45,8 +45,8 @@ public class RandomizedQueueTest {
 
     @Test
     public void testEnqueueTwoElements() {
-        randomizedQueue.enqueue(randomizedQueue.new Node());
-        randomizedQueue.enqueue(randomizedQueue.new Node());
+        randomizedQueue.enqueue("erty");
+        randomizedQueue.enqueue("ewrw");
         assertTrue(randomizedQueue.size() != 0);
         assertFalse(randomizedQueue.isEmpty());
         assertTrue(randomizedQueue.size() == 2);
@@ -97,13 +97,53 @@ public class RandomizedQueueTest {
     @Test
     public void testDequeTwoElements() {
         randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test");
         randomizedQueue.enqueue("test1");
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
+        randomizedQueue.dequeue();
         assertFalse(randomizedQueue.isEmpty());
         Object dequeue = randomizedQueue.dequeue();
         assertTrue(dequeue.toString().startsWith("test"));
         assertFalse(randomizedQueue.isEmpty());
-        assertTrue(randomizedQueue.size() == 1);
+        assertTrue(randomizedQueue.size() == 7);
     }
 
+    @Test
+    public void testArrayCopy() {
+        int[] ar1 = {1, 2, 3, 4, 5};
+        int[] ar2 = new int[4];
+
+        System.arraycopy(ar1, 3, ar2, 1, 2);
+        for (int i = 0; i < ar2.length; i++) {
+            System.out.println(ar2[i]);
+        }
+
+
+
+
+    }
 
 }
