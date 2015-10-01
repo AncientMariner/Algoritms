@@ -50,8 +50,25 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Item dequeue() {
         checkForEmptiness();
 
-        return null;
+        int random = StdRandom.uniform(N);
+
+        Item item = array[random];
+
+        int numMoved = size() - random - 1;
+        if (numMoved > 0) {
+            System.arraycopy(array, random+1, array, random, numMoved);
+        }
+        array[--N] = null;
+
+        shrinkTheArray();
+        return item;
     } // remove and return a random item
+
+    private void shrinkTheArray() {
+        if (N > 0 && N == array.length / 4) {
+            resize(array.length / 2);
+        }
+    }
 
     private void checkForEmptiness() {
         if (isEmpty()) {

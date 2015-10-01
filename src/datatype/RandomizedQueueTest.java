@@ -75,10 +75,8 @@ public class RandomizedQueueTest {
         randomizedQueue.enqueue("test");
         assertFalse(randomizedQueue.isEmpty());
         Object sample = randomizedQueue.sample();
-        assertEquals("test", randomizedQueue.sample());
-
+        assertEquals("test", sample);
     }
-
 
     @Test(expected = NoSuchElementException.class)
     public void testSampleNegative() {
@@ -88,6 +86,26 @@ public class RandomizedQueueTest {
     @Test(expected = NoSuchElementException.class)
     public void testDequeueNegative() {
         randomizedQueue.dequeue();
+    }
+
+    @Test
+    public void testDeque() {
+        randomizedQueue.enqueue("test");
+        assertFalse(randomizedQueue.isEmpty());
+        Object dequeue = randomizedQueue.dequeue();
+        assertEquals("test", dequeue);
+        assertTrue(randomizedQueue.isEmpty());
+    }
+
+    @Test
+    public void testDequeTwoElements() {
+        randomizedQueue.enqueue("test");
+        randomizedQueue.enqueue("test1");
+        assertFalse(randomizedQueue.isEmpty());
+        Object dequeue = randomizedQueue.dequeue();
+        assertTrue(dequeue.toString().startsWith("test"));
+        assertFalse(randomizedQueue.isEmpty());
+        assertTrue(randomizedQueue.size() == 1);
     }
 
 
