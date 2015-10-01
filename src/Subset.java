@@ -3,10 +3,11 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class Subset {
     public static void main(String[] args) {
-        RandomizedQueue randomizedQueue = new RandomizedQueue();
+        RandomizedQueue<String> randomizedQueue = new RandomizedQueue<String>();
         int numberOfReads = Integer.parseInt(args[0]);
 
-        while(!StdIn.isEmpty()) {
+        while (!StdIn.isEmpty()) {
+
             String item = StdIn.readString();
 
             randomizedQueue.enqueue(item);

@@ -110,13 +110,13 @@ public class Deque<Item> implements Iterable<Item> {
 //        return new MyIterator<Item>();
 //    }// return an iterator over items in order from front to end
 
-    class Node {
+    private class Node {
         private Node next;
         private Node previous;
         private Item value;
     }
 
-    class MyIterator implements java.util.Iterator {
+    private class MyIterator implements java.util.Iterator {
         private Node current = first;
         @Override
         public boolean hasNext() {

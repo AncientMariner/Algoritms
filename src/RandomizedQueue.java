@@ -54,7 +54,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         int numMoved = size() - random - 1;
         if (numMoved > 0) {
-            for (int i = random; i < N - 1 ; i++) {
+            for (int i = random; i < N - 1; i++) {
                 array[i] = array[i + 1];
             } // System.arraycopy(array, random+1, array, random, numMoved);
         }
@@ -81,8 +81,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         return new MyIterator();
     } // return an independent iterator over items in random order
 
-    class MyIterator implements java.util.Iterator {
-        int random;
+    private class MyIterator implements java.util.Iterator {
+        private int random;
 
         @Override
         public boolean hasNext() {
@@ -107,13 +107,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
     }
 
-    public static void main(String[] args) {} // unit testing
+    public static void main(String[] args) {
+    } // unit testing
 }
-
-
-/**
- * The order of two or more iterators to the same randomized queue
- * must be mutually independent; each iterator must maintain its
- * own random order.
- *
-*/

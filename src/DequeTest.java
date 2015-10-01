@@ -33,7 +33,7 @@ public class DequeTest {
 
     @Test
     public void testAddFirst() {
-        deque.addFirst(new Deque().new Node());
+        deque.addFirst("blabla");
         assertFalse(deque.isEmpty());
         assertTrue(deque.size() != 0);
         assertTrue(deque.size() == 1);
@@ -41,15 +41,15 @@ public class DequeTest {
 
     @Test
     public void testSize() throws Exception {
-        deque.addFirst(new Deque().new Node());
+        deque.addFirst("blabla");
         assertTrue(deque.size() != 0);
         assertTrue(deque.size() == 1);
     }
 
     @Test
     public void testAddFirstTwice() {
-        deque.addFirst(new Deque().new Node());
-        deque.addFirst(new Deque().new Node());
+        deque.addFirst("blabla");
+        deque.addFirst("blabla");
         assertFalse(deque.isEmpty());
         assertTrue(deque.size() != 0);
         assertTrue(deque.size() == 2);
@@ -58,7 +58,7 @@ public class DequeTest {
 
     @Test
     public void testAddLast() {
-        deque.addLast(new Deque().new Node());
+        deque.addLast("blabla");
         assertFalse(deque.isEmpty());
         assertTrue(deque.size() != 0);
         assertTrue(deque.size() == 1);
@@ -66,8 +66,8 @@ public class DequeTest {
 
     @Test
     public void testAddLastTwice() {
-        deque.addLast(new Deque().new Node());
-        deque.addLast(new Deque().new Node());
+        deque.addLast("blabla");
+        deque.addLast("blabla");
         assertFalse(deque.isEmpty());
         assertTrue(deque.size() != 0);
         assertTrue(deque.size() == 2);
@@ -75,8 +75,8 @@ public class DequeTest {
 
     @Test
     public void testAddFirstAddLast() {
-        deque.addFirst(new Deque().new Node());
-        deque.addLast(new Deque().new Node());
+        deque.addFirst("blabla");
+        deque.addLast("blabla");
         assertFalse(deque.isEmpty());
         assertTrue(deque.size() != 0);
         assertTrue(deque.size() == 2);
@@ -84,8 +84,8 @@ public class DequeTest {
 
     @Test
     public void testAddLastAddFirst() {
-        deque.addLast(new Deque().new Node());
-        deque.addFirst(new Deque().new Node());
+        deque.addLast("blabla");
+        deque.addFirst("blabla");
         assertFalse(deque.isEmpty());
         assertTrue(deque.size() != 0);
         assertTrue(deque.size() == 2);
@@ -93,12 +93,12 @@ public class DequeTest {
 
     @Test
     public void testAddCoupleOfElements() {
-        deque.addLast(new Deque().new Node());
-        deque.addFirst(new Deque().new Node());
-        deque.addLast(new Deque().new Node());
-        deque.addLast(new Deque().new Node());
-        deque.addFirst(new Deque().new Node());
-        deque.addFirst(new Deque().new Node());
+        deque.addLast("blabla");
+        deque.addFirst("blabla");
+        deque.addLast("blabla");
+        deque.addLast("blabla");
+        deque.addFirst("blabla");
+        deque.addFirst("blabla");
         assertFalse(deque.isEmpty());
         assertTrue(deque.size() != 0);
         assertTrue(deque.size() == 6);
@@ -106,8 +106,7 @@ public class DequeTest {
 
     @Test
     public void testRemoveFirst() {
-        Deque.Node itemToAdd = new Deque().new Node();
-        deque.addFirst(itemToAdd);
+        deque.addFirst("blabla");
 
         assertFalse(deque.isEmpty());
         assertTrue(deque.size() != 0);
@@ -115,7 +114,7 @@ public class DequeTest {
 
         Object obj = deque.removeFirst();
         assertNotNull(obj);
-        assertEquals(itemToAdd, obj);
+        assertEquals("blabla", obj);
 
         assertTrue(deque.isEmpty());
         assertTrue(deque.size() == 0);
@@ -123,8 +122,7 @@ public class DequeTest {
 
     @Test
     public void testRemoveLast() {
-        Deque.Node itemToAdd = new Deque().new Node();
-        deque.addLast(itemToAdd);
+        deque.addLast("blabla");
 
         assertFalse(deque.isEmpty());
         assertTrue(deque.size() != 0);
@@ -132,7 +130,7 @@ public class DequeTest {
 
         Object obj = deque.removeLast();
         assertNotNull(obj);
-        assertEquals(itemToAdd, obj);
+        assertEquals("blabla", obj);
 
         assertTrue(deque.isEmpty());
         assertTrue(deque.size() == 0);
