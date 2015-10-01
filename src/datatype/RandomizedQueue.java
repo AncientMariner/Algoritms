@@ -78,37 +78,39 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     @Override
     public Iterator<Item> iterator() {
-//        return new MyIterator();
-        return null;
+        return new MyIterator();
     } // return an independent iterator over items in random order
 
     class Node {
-        private Node next;
         private Item value;
     }
 
-//    class MyIterator implements java.util.Iterator {
-//        enqueue
-//        private Node current = first;
-//        @Override
-//        public boolean hasNext() {
-//            return current != null;
-//        }
-//        @Override
-//        public Item next() {
-//            if (!hasNext()) {
-//                throw new NoSuchElementException("No more items to return");
-//            }
-//            Item item = current.value;
-//            current = current.next;
-//            return item;
-//        }
-//        @Override
-//        public void remove() {
-//            throw new UnsupportedOperationException("It is impossible "
-//                    + "to remove via iterator");
-//        }
-//    }
+    class MyIterator implements java.util.Iterator {
+        private Node current = (Node) array[0];
+        int random;
+
+        @Override
+        public boolean hasNext() {
+            if (N == 0) {
+                throw new NoSuchElementException("Size is 0, " +
+                                                 "there is no elements");
+            }
+            random = StdRandom.uniform(N);
+            return array[random] != null;
+        }
+        @Override
+        public Item next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException("No more items to return");
+            }
+            return array[random];
+        }
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("It is impossible "
+                    + "to remove via iterator");
+        }
+    }
 
     public static void main(String[] args) {} // unit testing
 }

@@ -1,7 +1,6 @@
 package datatype;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
@@ -53,22 +52,20 @@ public class RandomizedQueueTest {
         assertTrue(randomizedQueue.size() == 2);
     }
 
-    @Ignore
     @Test(expected = UnsupportedOperationException.class)
     public void testRemoveInIterator() {
         randomizedQueue.iterator().remove();
     }
 
-    @Ignore
     @Test(expected = NoSuchElementException.class)
     public void testIteratorNext() {
         randomizedQueue.iterator().next();
     }
 
-//    @Test
-//    public void testIteratorNotNull() {
-//        assertNotNull(randomizedQueue.iterator());
-//    }
+    @Test
+    public void testIteratorNotNull() {
+        assertNotNull(randomizedQueue.iterator());
+    }
 
     @Test
     public void testSample() {
