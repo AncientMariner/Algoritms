@@ -13,8 +13,10 @@ public class Subset {
             randomizedQueue.enqueue(item);
         }
 
-        while (numberOfReads-- > 0) {
-            StdOut.println(randomizedQueue.dequeue());
+        if (numberOfReads >= 0 && numberOfReads <= randomizedQueue.size()) {
+            while (numberOfReads-- > 0) {
+                StdOut.println(randomizedQueue.dequeue());
+            }
         }
     }
 }

@@ -4,33 +4,36 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
-    private Item[] array = (Item[]) new Object[1];
-    private int N;
+    private Item[] array;
+    private int size;
 
     public RandomizedQueue() {
+        array = (Item[]) new Object[1];
     } // construct an empty randomized queue
 
     public boolean isEmpty() {
-        return N == 0;
+        return size == 0;
     } // is the queue empty?
 
     public int size() {
-        return N;
+        return size;
     } // return the number of items on the queue
 
     public void enqueue(Item item) {
         checkForNotNull(item);
 
-        if (N == array.length) resize(2 * array.length);
+        if (size == array.length) resize(2 * array.length);
 
-        array[N++] = item;
+        array[size++] = item;
     } // add the item
 
     private void resize(int newSize) {
-        Item[] temp = (Item[]) new Object[newSize];
-        for (int i = 0; i < N; i++)
-            temp[i] = array[i];
-        array = temp;
+        if (newSize >= size) {
+            Item[] temp = (Item[]) new Object[newSize];
+            for (int i = 0; i < size; i++)
+                temp[i] = array[i];
+            array = temp;
+        }
     }
 
     private void checkForNotNull(Item item) {
@@ -41,31 +44,34 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     public Item sample() {
         checkForEmptiness();
-        int random = StdRandom.uniform(N);
-        return array[random];
+        return array[StdRandom.uniform(size)];
     } // return (but do not remove) a random item
 
     public Item dequeue() {
         checkForEmptiness();
 
-        int random = StdRandom.uniform(N);
+        int randomIndex = StdRandom.uniform(size);
 
-        Item item = array[random];
+        Item item = array[randomIndex];
 
-        int numMoved = size() - random - 1;
+        int numMoved = size - randomIndex - 1;
         if (numMoved > 0) {
-            for (int i = random; i < N - 1; i++) {
+            for (int i = randomIndex; i < size - 1; i++) {
                 array[i] = array[i + 1];
-            } // System.arraycopy(array, random+1, array, random, numMoved);
+            } // System.arraycopy(array, randomIndex+1, array, randomIndex, numMoved);
+            array[size - 1] = null;
+        } else {
+            array[randomIndex] = null;
         }
-        array[--N] = null;
+
+        size--;
 
         shrinkTheArray();
         return item;
     } // remove and return a random item
 
     private void shrinkTheArray() {
-        if (N > 0 && N == array.length / 4) {
+        if (size > 0 && size == array.length / 4) {
             resize(array.length / 2);
         }
     }
@@ -86,11 +92,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         @Override
         public boolean hasNext() {
-            if (N == 0) {
+            if (size == 0) {
                 throw new NoSuchElementException("Size is 0, " +
                                                  "there is no elements");
             }
-            random = StdRandom.uniform(N);
+            random = StdRandom.uniform(size);
             return array[random] != null;
         }
         @Override

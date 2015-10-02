@@ -65,7 +65,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     public Item removeFirst() {
         checkForEmptiness();
-        Node itemToReturn = first;
+        Item itemToReturn = first.value;
 
         if (size() > 1) {
             first = first.next;
@@ -75,12 +75,12 @@ public class Deque<Item> implements Iterable<Item> {
             last = null;
         }
         sizeCounter--;
-        return itemToReturn.value;
+        return itemToReturn;
     } // remove and return the item from the front
 
     public Item removeLast() {
         checkForEmptiness();
-        Node itemToReturn = last;
+        Item itemToReturn = last.value;
 
         if (size() > 1) {
             last = last.previous;
@@ -90,7 +90,7 @@ public class Deque<Item> implements Iterable<Item> {
             last = null;
         }
         sizeCounter--;
-        return itemToReturn.value;
+        return itemToReturn;
     } // remove and return the item from the end
 
     private void checkForEmptiness() {
