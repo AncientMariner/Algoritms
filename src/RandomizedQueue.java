@@ -30,8 +30,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private void resize(int newSize) {
         if (newSize >= size) {
             Item[] temp = (Item[]) new Object[newSize];
-            for (int i = 0; i < size; i++)
-                temp[i] = array[i];
+            System.arraycopy(array, 0, temp, 0, size);
             array = temp;
         }
     }
@@ -56,9 +55,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         int numMoved = size - randomIndex - 1;
         if (numMoved > 0) {
-            for (int i = randomIndex; i < size - 1; i++) {
-                array[i] = array[i + 1];
-            } // System.arraycopy(array, randomIndex+1, array, randomIndex, numMoved);
+            System.arraycopy(array, randomIndex+1, array, randomIndex, numMoved);
             array[size - 1] = null;
         } else {
             array[randomIndex] = null;
@@ -88,23 +85,25 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     } // return an independent iterator over items in random order
 
     private class MyIterator implements java.util.Iterator {
-        private int random;
+        private int current;
+        private Item[] itemsToIterate;
+
+        private MyIterator() {
+            itemsToIterate = (Item[]) new Object[size];
+            System.arraycopy(array, 0, itemsToIterate, 0, size);
+            StdRandom.shuffle(itemsToIterate);
+        }
 
         @Override
         public boolean hasNext() {
-            if (size == 0) {
-                throw new NoSuchElementException("Size is 0, " +
-                                                 "there is no elements");
-            }
-            random = StdRandom.uniform(size);
-            return array[random] != null;
+            return current < size;
         }
         @Override
         public Item next() {
             if (!hasNext()) {
                 throw new NoSuchElementException("No more items to return");
             }
-            return array[random];
+            return itemsToIterate[current++];
         }
         @Override
         public void remove() {
