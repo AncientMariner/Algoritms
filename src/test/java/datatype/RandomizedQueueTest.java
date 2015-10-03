@@ -1,6 +1,5 @@
-package test.java;
+package datatype;
 
-import main.java.datatype.RandomizedQueue;
 import org.junit.Before;
 import org.junit.Test;
 

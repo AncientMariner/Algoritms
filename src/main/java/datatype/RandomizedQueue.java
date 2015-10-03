@@ -1,4 +1,4 @@
-package main.java.datatype;
+package datatype;
 
 import edu.princeton.cs.algs4.StdRandom;
 

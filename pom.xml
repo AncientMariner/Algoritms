@@ -26,6 +26,13 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <artifactId>..</artifactId>
+            <groupId>..</groupId>
+            <scope>system</scope>
+            <version>1.0.0</version>
+            <systemPath>/home/xander/IdeaProjects/Algorithms/algs4.jar</systemPath>
+        </dependency>
     </dependencies>
     <build>
         <finalName>Algorithms</finalName>

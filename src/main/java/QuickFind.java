@@ -1,5 +1,3 @@
-package main.java;
-
 public class QuickFind {
     private int id[];
 

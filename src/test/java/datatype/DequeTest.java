@@ -1,6 +1,5 @@
-package test.java;
+package datatype;
 
-import main.java.datatype.Deque;
 import org.junit.Before;
 import org.junit.Test;
 

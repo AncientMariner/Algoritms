@@ -1,4 +1,4 @@
-package main.java.percolation; /******************************************************************************
+package percolation; /******************************************************************************
  *  Compilation:  javac InteractivePercolationVisualizer.java
  *  Execution:    java InteractivePercolationVisualizer N
  *  Dependencies: PercolationVisualizer.java Percolation.java
