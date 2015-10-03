@@ -1,3 +1,5 @@
+package main.java;
+
 public class QuickUnion {
     private int id[];
 

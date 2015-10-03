@@ -1,4 +1,4 @@
-package datatype;
+package main.java.datatype;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

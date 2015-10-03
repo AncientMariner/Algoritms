@@ -1,3 +1,6 @@
+package test.java;
+
+import main.java.QuickUnion;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
