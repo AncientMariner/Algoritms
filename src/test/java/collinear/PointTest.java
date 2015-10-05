@@ -20,7 +20,6 @@ public class PointTest {
         point = new Point(x, y);
 
         assertNotNull(point);
-        assertEquals("(" + x + ", " + y + ")", point.toString());
     }
 
 
@@ -36,7 +35,13 @@ public class PointTest {
 
     @Test
     public void testToString() throws Exception {
+        Point point;
+        int x = 0;
+        int y = 0;
+        point = new Point(x, y);
 
+        assertNotNull(point);
+        assertEquals("(" + x + ", " + y + ")", point.toString());
     }
 
     @Test
