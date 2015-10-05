@@ -116,7 +116,29 @@ public class Point implements Comparable<Point> {
      */
     public Comparator<Point> slopeOrder() {
         /* YOUR CODE HERE */
-        return null;
+        return new Comparator<Point>() {
+            @Override
+            public int compare(Point o1, Point o2) {
+                double result = slopeTo(o1) - slopeTo(o2);
+                boolean firstSlopeIsNegativeInf = ((Double) (slopeTo(o1))).equals(Double.NEGATIVE_INFINITY);
+                boolean secondSlopeIsNegativeInf = ((Double) (slopeTo(o2))).equals(Double.NEGATIVE_INFINITY);
+                if (firstSlopeIsNegativeInf && secondSlopeIsNegativeInf) {
+                    return 0;
+                }
+                boolean firstSlopeIsPositiveInf = ((Double) (slopeTo(o1))).equals(Double.POSITIVE_INFINITY);
+                boolean secondSlopeIsPositiveInf = ((Double) (slopeTo(o2))).equals(Double.POSITIVE_INFINITY);
+                if (firstSlopeIsPositiveInf && secondSlopeIsPositiveInf) {
+                    return 0;
+                }
+
+                if (result < 0) {
+                    return -1;
+                } else if (result > 0) {
+                    return +1;
+                } else
+                return 0;
+            }
+        };
     }
 
 
