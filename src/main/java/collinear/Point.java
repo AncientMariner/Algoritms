@@ -107,7 +107,6 @@ public class Point implements Comparable<Point> {
         } else return ((double)(that.y - this.y)) / ((double)(that.x - this.x));
     }
 
-
     /**
      * Compares two points by the slope they make with this point.
      * The slope is defined as in the slopeTo() method.
@@ -140,8 +139,6 @@ public class Point implements Comparable<Point> {
             }
         };
     }
-
-
 
     /**
      * Unit tests the Point data type.
