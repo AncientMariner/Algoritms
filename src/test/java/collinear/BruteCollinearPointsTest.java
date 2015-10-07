@@ -13,18 +13,34 @@ public class BruteCollinearPointsTest {
 
     @Test
     public void testBasic() {
-        assertNotNull(new BruteCollinearPoints(null));
+        assertNotNull(new BruteCollinearPoints(new Point[]{new Point(1, 2)}));
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testNegative() {
+        new BruteCollinearPoints(null);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testNegativePoints1() {
+        new BruteCollinearPoints(new Point[]{});
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testNegativePoints2() {
+        new BruteCollinearPoints(new Point[]{null});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testDuplicate() {
+        new BruteCollinearPoints(new Point[]{new Point(1, 2), new Point(2, 1), new Point(1, 2)});
+    }
 
     @Test
     public void testNumberOfSegments() throws Exception {
-//        BruteCollinearPoints bruteCollinearPoints = new BruteCollinearPoints(null);
-
     }
 
     @Test
     public void testSegments() throws Exception {
-
     }
 }
