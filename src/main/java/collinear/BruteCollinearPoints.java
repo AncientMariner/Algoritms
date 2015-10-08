@@ -26,8 +26,6 @@ public class BruteCollinearPoints {
 
         lineSegments = new LineSegment[this.points.length];
 
-        Point max = this.points[0];
-        Point previousI = this.points[0];
         Point previousJ = this.points[0];
         Point previousK = this.points[0];
         Point previousL = this.points[0];
@@ -49,12 +47,8 @@ public class BruteCollinearPoints {
                                         && slope02 == slope03
                                         && slope01 == slope03) {
                                     if (numberOfSegments < this.points.length) {
-                                        if (max.compareTo(this.points[l]) < 0) {
-                                            max = this.points[l];
-                                        }
                                         lineSegments[numberOfSegments++]
                                                 = new LineSegment(this.points[i], this.points[l]);
-//                                    previousI = points[i];
                                         previousJ = points[j];
                                         previousK = points[k];
                                         previousL = points[l];
