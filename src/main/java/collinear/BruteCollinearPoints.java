@@ -14,7 +14,7 @@ public class BruteCollinearPoints {
 
         double slope01;
         double slope02;
-        double slope03;
+        double slope03 = -1;
 
         List<Point> pointList = identifyUniquePoints(points);
 
@@ -26,22 +26,21 @@ public class BruteCollinearPoints {
 
         lineSegments = new LineSegment[this.points.length];
 
-        Point previousJ = this.points[0];
-        Point previousK = this.points[0];
-        Point previousL = this.points[0];
+        Point prevJ = this.points[0];
+        Point prevK = this.points[0];
+        Point prevL = this.points[0];
         for (int i = 0; i < this.points.length; i++) {
             for (int j = 0 + i; j < this.points.length; j++) {
                 for (int k = 0 + j; k < this.points.length; k++) {
                     for (int l = 0 + k; l < this.points.length; l++) {
-                        if (i != j && i != k && i != l
-                                && j != k && j != l
-                                && k != l) {
-                            if (previousJ.compareTo(points[j]) != 0
-                                    && previousK.compareTo(points[k]) != 0
-                                    && previousL.compareTo(points[l]) != 0
+                        if(i < j && i < k && i < l   && j < k && j < l  && k < l) {
+                            if (prevJ.compareTo(this.points[j]) != 0
+                                    && prevK.compareTo(this.points[k]) != 0
+                                    && prevL.compareTo(this.points[l]) != 0
                                     ) {
                                 slope01 = this.points[i].slopeTo(this.points[j]);
                                 slope02 = this.points[i].slopeTo(this.points[k]);
+                                if(slope01 == slope02)
                                 slope03 = this.points[i].slopeTo(this.points[l]);
                                 if (slope01 == slope02
                                         && slope02 == slope03
@@ -49,9 +48,9 @@ public class BruteCollinearPoints {
                                     if (numberOfSegments < this.points.length) {
                                         lineSegments[numberOfSegments++]
                                                 = new LineSegment(this.points[i], this.points[l]);
-                                        previousJ = points[j];
-                                        previousK = points[k];
-                                        previousL = points[l];
+                                        prevJ = this.points[j];
+                                        prevK = this.points[k];
+                                        prevL = this.points[l];
                                     }
                                 }
                             }
