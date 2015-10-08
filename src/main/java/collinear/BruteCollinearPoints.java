@@ -1,8 +1,6 @@
 package collinear;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class BruteCollinearPoints {
     private Point[] points;
@@ -82,12 +80,12 @@ public class BruteCollinearPoints {
             }
         }
         if (points.length > 1) {
+            Set<Point> pointSet = new TreeSet<>();
             for (int i = 0; i < points.length; i++) {
-                for (int j = 0 + i; j < points.length; j++) {
-                    if (i != j && points[i].compareTo(points[j]) == 0) {
-                        throw new IllegalArgumentException("there is a duplicate");
-                    }
-                }
+                pointSet.add(points[i]);
+            }
+            if (pointSet.size() != points.length) {
+                throw new IllegalArgumentException("there is a duplicate");
             }
         }
         if (points.length == 1) {

@@ -22,7 +22,7 @@ public class FastCollinearPointsTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testNegative3() {
-        new FastCollinearPoints(new Point[]{new Point(1, 2), new Point(1, 2)});
+        new FastCollinearPoints(new Point[]{new Point(1, 2), new Point(31, 2), new Point(1, 2)});
     }
 
 
