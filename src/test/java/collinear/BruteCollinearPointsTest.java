@@ -30,17 +30,6 @@ public class BruteCollinearPointsTest {
         new BruteCollinearPoints(new Point[]{new Point(1, 2), new Point(2, 1), new Point(1, 2)});
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void testBigSize() {
-        new BruteCollinearPoints(new Point[]{
-                new Point(1, 2),
-                new Point(12, 2),
-                new Point(13, 2),
-                new Point(21, 1),
-                new Point(15, 2)});
-    }
-
-
     @Test
     public void testForSizeOne() throws Exception {
         new BruteCollinearPoints(new Point[]{new Point(1, 2)});

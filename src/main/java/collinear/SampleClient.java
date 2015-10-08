@@ -6,7 +6,6 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class SampleClient {
     public static void main(String[] args) {
-
         // read the N points from a file
         In in = new In(args[0]);
         int N = in.readInt();
