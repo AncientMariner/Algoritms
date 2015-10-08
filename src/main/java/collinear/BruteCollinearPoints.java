@@ -25,17 +25,12 @@ public class BruteCollinearPoints {
                 }
             }
         }
-        if (points.length > 4) {
-            throw new UnsupportedOperationException("size is too big");
-        }
         if (points.length == 1) {
             return; // no way to figure out the collinear point
         }
 
-        this.points = points;
-    } // finds all line segments containing 4 points
+        this.points = points;  // do we need it ?
 
-    public LineSegment[] segments() {
         double slope01;
         double slope12;
         double slope23;
@@ -61,9 +56,11 @@ public class BruteCollinearPoints {
                     }
                 }
             }
-        } // should this transformation be in the constructor ???
+        }
+    } // finds all line segments containing 4 points
 
-
+    public LineSegment[] segments() {
+         // should this transformation be in the constructor ???
         return this.lineSegments;
     } // the line segments
 
