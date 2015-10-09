@@ -50,7 +50,7 @@ public class BruteCollinearPoints {
             for (int j = 0 + i; j < this.points.length; j++) {
                 for (int k = 0 + j; k < this.points.length; k++) {
                     for (int l = 0 + k; l < this.points.length; l++) {
-                        if(i < j
+                        if (i < j
                                 && i < k && i < l
                                                  && j < k && j < l
                                                                    && k < l) {
@@ -59,7 +59,7 @@ public class BruteCollinearPoints {
                                     && prevL.compareTo(this.points[l]) != 0) {
                                 slope01 = this.points[i].slopeTo(this.points[j]);
                                 slope02 = this.points[i].slopeTo(this.points[k]);
-                                if(slope01 == slope02)
+                                if (slope01 == slope02)
                                     slope03 = this.points[i].slopeTo(this.points[l]);
                                 if (slope01 == slope02
                                         && slope02 == slope03
