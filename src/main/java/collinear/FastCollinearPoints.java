@@ -1,5 +1,9 @@
 package collinear;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.Arrays;
 
 public class FastCollinearPoints {
@@ -18,33 +22,37 @@ public class FastCollinearPoints {
            }
        }
        if (points.length > 1) {
+           Set<Point> pointSet = new TreeSet<>();
            for (int i = 0; i < points.length; i++) {
-               for (int j = 0 + i; j < points.length; j++) {
-                   if (i != j && points[i].compareTo(points[j]) == 0) {
-                       throw new IllegalArgumentException("there is a duplicate");
-                   }
-               }
+               pointSet.add(points[i]);
+           }
+           if (pointSet.size() != points.length) {
+               throw new IllegalArgumentException("there is a duplicate");
            }
        }
        if (points.length == 1) {
            return; // no way to figure out the collinear point
        }
 
-       double[] slopes = new double[points.length - 1];
-       for (int i = 0; i < points.length - 1; i++) {  // += 2 ????
-           slopes[i] = points[i].slopeTo(points[i + 1]);
+       List<Double> slopesList = new ArrayList<>();
+       for (int i = 0; i < points.length - 1; i++) {
+           slopesList.add(points[i].slopeTo(points[i + 1]));
+       }
+       double[] slopes = new double[slopesList.size()];
+       for (int i = 0; i < slopesList.size(); i++) {
+           slopes[i] = slopesList.get(i);
        }
        Arrays.sort(slopes);
-       lineSegments = new LineSegment[points.length];
+
+       lineSegments = new LineSegment[slopes.length];
        for (int i = 1; i < slopes.length - 1; i++) {
-          if(slopes[i -1] == slopes[i]
-          && slopes[i] == slopes[i + 1]
-          && slopes[i - 1] == slopes[i + 1]) {
+          if (slopes[i - 1] == slopes[i]
+              && slopes[i] == slopes[i + 1]
+              && slopes[i - 1] == slopes[i + 1]) {
               //should it be 3 or 4 points ????
-              if (i + 2 < slopes.length
-                      && slopes[i + 1] == slopes[i + 2]) {
+                 if (numberOfSegments < slopes.length) {
                   lineSegments[numberOfSegments++] =
-                          new LineSegment(points[i - 1], points[i + 2]);
+                          new LineSegment(points[i - 1], points[i + 1]);
               }
           }
        }
@@ -55,6 +63,8 @@ public class FastCollinearPoints {
    } // the number of line segments
 
    public LineSegment[] segments() {
-       return lineSegments;
+       LineSegment[] copyOfLineSegments = new LineSegment[numberOfSegments];
+       System.arraycopy(lineSegments, 0, copyOfLineSegments, 0, numberOfSegments);
+       return copyOfLineSegments;
    } // the line segments
 }

@@ -1,6 +1,10 @@
 package collinear;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Arrays;
 
 public class BruteCollinearPoints {
     private Point[] points;
@@ -30,7 +34,6 @@ public class BruteCollinearPoints {
         if (points.length == 1) {
             return;
         }
-        pointSet.toArray();
         List<Point> pointList = new ArrayList<>(pointSet);
         this.points = new Point[pointList.size()];
         for (int i = 0; i < pointList.size(); i++) {
