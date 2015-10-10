@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class BruteCollinearPoints {
     private Point[] points;
     private LineSegment[] lineSegments;
-    private int numberOfSegments;
+    private int numberOfSegments = 0;
 
     public BruteCollinearPoints(Point[] points) {
         if (points == null || points.length == 0) {
@@ -44,33 +44,61 @@ public class BruteCollinearPoints {
         lineSegments = new LineSegment[this.points.length];
 
         double slope01, slope02, slope03 = -1;
-        Point prevJ = this.points[0], prevK = prevJ, prevL = prevK;
 
-        for (int i = 0; i < this.points.length; i++) {
-            for (int j = 0 + i; j < this.points.length; j++) {
-                for (int k = 0 + j; k < this.points.length; k++) {
-                    for (int l = 0 + k; l < this.points.length; l++) {
-                        if (i < j
-                                && i < k && i < l
-                                                 && j < k && j < l
-                                                                   && k < l) {
-                            if (prevJ.compareTo(this.points[j]) != 0
-                                    && prevK.compareTo(this.points[k]) != 0
-                                    && prevL.compareTo(this.points[l]) != 0) {
-                                slope01 = this.points[i].slopeTo(this.points[j]);
-                                slope02 = this.points[i].slopeTo(this.points[k]);
-                                if (slope01 == slope02)
-                                    slope03 = this.points[i].slopeTo(this.points[l]);
-                                if (slope01 == slope02
-                                        && slope02 == slope03
-                                        && slope01 == slope03) {
-                                    if (numberOfSegments < this.points.length) {
-                                        lineSegments[numberOfSegments++]
-                                                = new LineSegment(this.points[i],
-                                                this.points[l]);
-                                        prevJ = this.points[j];
-                                        prevK = this.points[k];
-                                        prevL = this.points[l];
+        if (this.points.length < 5) {
+            switch (this.points.length) {
+                case 2: if (numberOfSegments < this.points.length) {
+                    lineSegments[numberOfSegments++]
+                            = new LineSegment(this.points[0],
+                            this.points[1]);
+                } break;
+                case 3:
+                    slope01 = this.points[0].slopeTo(this.points[1]);
+                    slope02 = this.points[0].slopeTo(this.points[2]);
+                    if (slope01 == slope02) {
+                        if (numberOfSegments < this.points.length) {
+                            lineSegments[numberOfSegments++]
+                                    = new LineSegment(this.points[0],
+                                    this.points[2]);
+                        }
+                    }
+                    break;
+                case 4:
+                    slope01 = this.points[0].slopeTo(this.points[1]);
+                    slope02 = this.points[0].slopeTo(this.points[2]);
+                    if (slope01 == slope02)
+                        slope03 = this.points[0].slopeTo(this.points[3]);
+                    if (slope01 == slope02
+                            && slope02 == slope03
+                            && slope01 == slope03) {
+                        if (numberOfSegments < this.points.length) {
+                            lineSegments[numberOfSegments++]
+                                    = new LineSegment(this.points[0],
+                                    this.points[3]);
+                        }
+                    }
+                    break;
+                default: return;
+            }
+        } else {
+            for (int i = 0; i < this.points.length; i++) {
+                for (int j = 0 + i; j < this.points.length; j++) {
+                    for (int k = 0 + j; k < this.points.length; k++) {
+                        for (int l = 0 + k; l < this.points.length; l++) {
+                            if (i != j && i != k && i != l
+                                    && j != k
+                                    && k != l) {
+                                    slope01 = this.points[i].slopeTo(this.points[j]);
+                                    slope02 = this.points[i].slopeTo(this.points[k]);
+                                    if (slope01 == slope02)
+                                        slope03 = this.points[i].slopeTo(this.points[l]);
+                                    if (slope01 == slope02
+                                            && slope02 == slope03
+                                            && slope01 == slope03) {
+                                        if (numberOfSegments < this.points.length) {
+                                            lineSegments[numberOfSegments++]
+                                                    = new LineSegment(this.points[i],
+                                                    this.points[l]);
                                     }
                                 }
                             }
