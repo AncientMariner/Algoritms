@@ -1,13 +1,22 @@
 package puzzle8;
 
 public class Board {
+    int[][] blocks;
+    int dimension;
     public Board(int[][] blocks) {
-
+        if (blocks == null) {
+            throw new IllegalStateException("it is not possible to create empty block");
+        }
+        this.blocks = blocks;
+        dimension = (int) Math.sqrt(blocks.length);
     } // construct a board from an N-by-N array of blocks
+      // (where blocks[i][j] = block in row i, column j)
 
-    // (where blocks[i][j] = block in row i, column j)
     public int dimension() {
-        return 0;
+        if (dimension <= 0) {
+            throw new IllegalStateException("board was not created");
+        }
+        return dimension;
     } // board dimension N
 
     public int hamming() {
