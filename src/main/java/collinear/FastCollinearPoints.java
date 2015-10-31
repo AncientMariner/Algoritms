@@ -50,6 +50,7 @@ public class FastCollinearPoints {
 
         LineSegment tempSegment = null;
         for (int i = 0; i < n; i++) {
+//            Arrays.sort(points, i, n);
             Arrays.sort(points);
             Arrays.sort(points, i + 1, n, points[i].slopeOrder());
 
