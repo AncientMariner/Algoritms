@@ -2,6 +2,7 @@ package puzzle8;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class BoardTest {
@@ -48,6 +49,16 @@ public class BoardTest {
 
     @Test
     public void testEquals() throws Exception {
+        board = new Board(new int[][] { {1, 0, 3}, {4, 5, 6}, {7, 8, 9} } );
+        Board anotherSimilarBoard = new Board(new int[][]{{1, 0, 3}, {4, 5, 6}, {7, 8, 9}});
+        assertTrue(board.equals(anotherSimilarBoard));
+    }
+
+    @Test
+    public void testEqualsNegative() throws Exception {
+        board = new Board(new int[][] { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} } );
+        Board anotherSimilarBoard = new Board(new int[][]{{1, 0, 3}, {4, 5, 6}, {7, 8, 9}});
+        assertFalse(board.equals(anotherSimilarBoard));
     }
 
     @Test

@@ -64,7 +64,16 @@ public class Board {
     } // a board that is obtained by exchanging any pair of blocks
 
     public boolean equals(Object y) {
-        return false;
+        Board board = (Board) y;
+        int [][] objectToCompare = board.blocks;
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                if (blocks[i][j] != objectToCompare[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     } // does this board equal y?
 
     public Iterable<Board> neighbors() {
