@@ -5,7 +5,7 @@ public class Board {
     int dimension;
     public Board(int[][] blocks) {
         if (blocks == null) {
-            throw new IllegalStateException("it is not possible to create empty block");
+            throw new IllegalStateException("it is not possible to create empty board");
         }
         this.blocks = blocks;
         dimension = (int) Math.sqrt(blocks.length * blocks[0].length);
@@ -81,7 +81,14 @@ public class Board {
     } // all neighboring boards
 
     public String toString() {
-        return "toString";
+        String result = "";
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                result += blocks[i][j] + " ";
+            }
+            result += "\n";
+        }
+        return result;
     } // string representation of this board (in the output format specified below)
 
     public static void main(String[] args) {
