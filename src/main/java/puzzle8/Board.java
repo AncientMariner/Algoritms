@@ -8,7 +8,7 @@ public class Board {
             throw new IllegalStateException("it is not possible to create empty block");
         }
         this.blocks = blocks;
-        dimension = (int) Math.sqrt(blocks.length);
+        dimension = (int) Math.sqrt(blocks.length * blocks[0].length);
     } // construct a board from an N-by-N array of blocks
       // (where blocks[i][j] = block in row i, column j)
 
@@ -20,14 +20,42 @@ public class Board {
     } // board dimension N
 
     public int hamming() {
-        return 0;
+        int hammingCount = 0;
+        for (int[] block : blocks) {
+            for (int i = 0; i < block.length; i++) {
+                if (block[i] != 0 && block[i] != i + 1) {
+                    hammingCount++;
+                }
+            }
+        }
+        return hammingCount; // number or moves, how to count ?
     } // number of blocks out of place
 
     public int manhattan() {
-        return 0;
+        int verticalCounter;
+        int horizontalCounter;
+        int manhattan = 0;
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                if (blocks[i][j] != 0 && blocks[i][j] != i * j + j + 1) {
+                    horizontalCounter = blocks[i][j] % dimension - 1;
+                    verticalCounter = blocks[i][j] / dimension;
+                    manhattan += (verticalCounter + horizontalCounter);
+                }
+            }
+        }
+        return manhattan;
     } // sum of Manhattan distances between blocks and goal
 
     public boolean isGoal() {
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                if (blocks[i][j] != 0) {
+                    if(blocks[i][j] == i * j + j + 1)
+                        return true;
+                }
+            }
+        }
         return false;
     } // is this board the goal board?
 
