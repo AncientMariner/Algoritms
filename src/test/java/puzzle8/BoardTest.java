@@ -3,6 +3,7 @@ package puzzle8;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class BoardTest {
@@ -45,6 +46,8 @@ public class BoardTest {
 
     @Test
     public void testTwin() throws Exception {
+        board = new Board(new int[][] { {1, 0, 3}, {4, 5, 6}, {7, 8, 9} } );
+        assertNotNull(board.twin());
     }
 
     @Test
@@ -63,16 +66,13 @@ public class BoardTest {
 
     @Test
     public void testNeighbors() throws Exception {
+        board = new Board(new int[][] { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} } );
+        assertNotNull(board.neighbors());
     }
 
     @Test
     public void testToString() throws Exception {
         board = new Board(new int[][]{{1, 0, 3}, {4, 5, 6}, {7, 8, 9}});
         assertEquals("1 0 3 \n4 5 6 \n7 8 9 \n", board.toString());
-    }
-
-    @Test
-    public void testMain() throws Exception {
-
     }
 }

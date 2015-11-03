@@ -1,7 +1,11 @@
 package puzzle8;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Stack;
+
 public class Board {
-    int[][] blocks;
+    final int[][] blocks;
     int dimension;
     public Board(int[][] blocks) {
         if (blocks == null) {
@@ -60,7 +64,39 @@ public class Board {
     } // is this board the goal board?
 
     public Board twin() {
-        return null;
+        int left = 0;
+        int lDimensionI = 0;
+        int lDimensionJ = 0;
+        outLeft:
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                if (blocks[i][j] != 0) {
+                    left = blocks[i][j];
+                    lDimensionI = i;
+                    lDimensionJ = j;
+                    break outLeft;
+                }
+            }
+        }
+        int right = 0;
+        int rDimensionI = 0;
+        int rDimensionJ = 0;
+        outRight:
+        for (int i = dimension - 1; i >= 0; i--) {
+            for (int j = dimension - 1; j >= 0; j--) {
+                if (blocks[i][j] != 0) {
+                    right = blocks[i][j];
+                    rDimensionI = i;
+                    rDimensionJ = j;
+                    break outRight;
+                }
+            }
+        }
+        Board anotherBoard = new Board(Arrays.copyOf(blocks, blocks.length));
+        anotherBoard.blocks[lDimensionI][lDimensionJ] = right;
+        anotherBoard.blocks[rDimensionI][rDimensionJ] = left;
+
+        return anotherBoard;
     } // a board that is obtained by exchanging any pair of blocks
 
     public boolean equals(Object y) {
@@ -77,18 +113,20 @@ public class Board {
     } // does this board equal y?
 
     public Iterable<Board> neighbors() {
-        return null;
+        Collection<Board> iterable = new Stack<>();
+        iterable.add(twin());
+        return iterable;
     } // all neighboring boards
 
     public String toString() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                result += blocks[i][j] + " ";
+                result.append(blocks[i][j] + " ");
             }
-            result += "\n";
+            result.append("\n");
         }
-        return result;
+        return result.toString();
     } // string representation of this board (in the output format specified below)
 
     public static void main(String[] args) {
